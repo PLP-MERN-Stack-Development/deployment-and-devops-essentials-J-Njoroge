@@ -1,77 +1,42 @@
-# Deployment and DevOps for MERN Applications
+# Real-Time Chat App — Deployment & Monitoring Notes
 
-This assignment focuses on deploying a full MERN stack application to production, implementing CI/CD pipelines, and setting up monitoring for your application.
+This README adds monitoring and backup strategy guidance required for Week 7 submission. Use this file to document how the service is monitored, how backups are taken, and where CI/CD screenshots are stored for grading.
 
-## Assignment Overview
+## Monitoring
 
-You will:
-1. Prepare your MERN application for production deployment
-2. Deploy the backend to a cloud platform
-3. Deploy the frontend to a static hosting service
-4. Set up CI/CD pipelines with GitHub Actions
-5. Implement monitoring and maintenance strategies
+- Use Sentry (or a similar error-tracking tool) to capture server and client errors.
+  - Server: install `@sentry/node` and initialize in `server/server.js` when `SENTRY_DSN` is provided.
+  - Client: install `@sentry/react` and initialize in the React entry point when `VITE_SENTRY_DSN` is provided.
+  - Configure the DSN values as repository secrets or platform environment variables.
 
-## Getting Started
+- Uptime monitoring: use an external uptime monitor (UptimeRobot, Pingdom) to hit the health endpoint `GET /` regularly.
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week7-Assignment.md` file
-4. Use the provided templates and configuration files as a starting point
+- Performance monitoring: consider using APM (NewRelic, Datadog) or Render/Vercel built-in metrics to monitor CPU, memory, and response times.
 
-## Files Included
+## Backup Strategy
 
-- `Week7-Assignment.md`: Detailed assignment instructions
-- `.github/workflows/`: GitHub Actions workflow templates
-- `deployment/`: Deployment configuration files and scripts
-- `.env.example`: Example environment variable templates
-- `monitoring/`: Monitoring configuration examples
+- Database backups (MongoDB Atlas):
+  - Use Atlas's built-in backup and snapshot features for production clusters.
+  - Configure automated daily snapshots and retain as per course requirements.
 
-## Requirements
+- File uploads:
+  - Do not rely on local `uploads/` folder for production persistence. Instead use S3-compatible storage (AWS S3, DigitalOcean Spaces) and back up bucket policies.
 
-- A completed MERN stack application from previous weeks
-- Accounts on the following services:
-  - GitHub
-  - MongoDB Atlas
-  - Render, Railway, or Heroku (for backend)
-  - Vercel, Netlify, or GitHub Pages (for frontend)
-- Basic understanding of CI/CD concepts
+## CI/CD Evidence (for submission)
 
-## Deployment Platforms
+- Save screenshots of successful GitHub Actions runs and deployment pages (Render/Vercel) and place them under a `docs/ci-screenshots/` folder in the repo.
 
-### Backend Deployment Options
-- **Render**: Easy to use, free tier available
-- **Railway**: Developer-friendly, generous free tier
-- **Heroku**: Well-established, extensive documentation
+- Example structure:
 
-### Frontend Deployment Options
-- **Vercel**: Optimized for React apps, easy integration
-- **Netlify**: Great for static sites, good CI/CD
-- **GitHub Pages**: Free, integrated with GitHub
+```
+docs/
+  ci-screenshots/
+    github-actions-success.png
+    render-deploy.png
+```
 
-## CI/CD Pipeline
+Include links to the deployed frontend and backend URLs in `report.md` and in this README when available.
 
-The assignment includes templates for setting up GitHub Actions workflows:
-- `frontend-ci.yml`: Tests and builds the React application
-- `backend-ci.yml`: Tests the Express.js backend
-- `frontend-cd.yml`: Deploys the frontend to your chosen platform
-- `backend-cd.yml`: Deploys the backend to your chosen platform
+---
 
-## Submission
-
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
-
-1. Complete all deployment tasks
-2. Set up CI/CD pipelines with GitHub Actions
-3. Deploy both frontend and backend to production
-4. Document your deployment process in the README.md
-5. Include screenshots of your CI/CD pipeline in action
-6. Add URLs to your deployed applications
-
-## Resources
-
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/)
-- [Render Documentation](https://render.com/docs)
-- [Railway Documentation](https://docs.railway.app/)
-- [Vercel Documentation](https://vercel.com/docs)
-- [Netlify Documentation](https://docs.netlify.com/) 
+Document generated on: 2025-11-16

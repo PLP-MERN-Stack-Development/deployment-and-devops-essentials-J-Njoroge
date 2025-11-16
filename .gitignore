@@ -1,0 +1,52 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite / build outputs
+dist/
+.vite/
+build/
+
+# Environment variables
+.env
+.env.*.local
+server/.env
+client/.env
+
+# Server uploads (do not commit user uploads)
+server/uploads/
+uploads/
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Misc caches
+.cache/
+.parcel-cache/
+/.pnp*
+
+# Optional npm cache files
+*.tgz
+
+# Ignore local env override files
+local.env
