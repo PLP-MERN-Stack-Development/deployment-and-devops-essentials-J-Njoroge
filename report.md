@@ -50,7 +50,7 @@ A basic GitHub Actions workflow is included (`.github/workflows/ci.yml`) which i
 
 ## Live Demo
 
-- Frontend (Vercel):
+- Frontend (Vercel): Demo - https://real-time-communication-six.vercel.app/
 
 ---
 ### Screenshots
